@@ -1,0 +1,674 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Counters-Assignment",
+		"description": "A mini assessment to check the code.",
+		"contact": {
+			
+		},
+		"version": "1.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:5000",
+			"variables": {
+				
+			}
+		}
+	],
+	"paths": {
+		"/counters": {
+			"post": {
+				"tags": [
+					"Misc"
+				],
+				"summary": "Create Counter(s)",
+				"description": "The Array of JSON objects with counter name have to be passed in body via POST method. If the counter with the same name is not there, then it'll create with the counter with initial counter value of 1. The initial counter increment order will also be 1.",
+				"operationId": "CreateCounter(s)",
+				"parameters": [],
+				"requestBody": {
+					"description": "",
+					"content": {
+						"application/json": {
+							"schema": {
+								"type": "array",
+								"items": {
+									"$ref": "#/components/schemas/CreateCountersRequest"
+								},
+								"description": "",
+								"example": [
+									{
+										"name": "First"
+									},
+									{
+										"name": "Second"
+									}
+								]
+							},
+							"example": [
+								{
+									"name": "First"
+								},
+								{
+									"name": "Second"
+								}
+							]
+						}
+					},
+					"required": true
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"headers": {
+							
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/CreateCounters"
+									},
+									"description": "",
+									"example": [
+										{
+											"message": "Counter Named 'First' created successfully",
+											"status": "CREATED",
+											"statusCode": 201,
+											"data": {
+												"id": 1,
+												"value": 1,
+												"name": "First",
+												"incrementOrder": 1
+											}
+										},
+										{
+											"message": "Counter Named 'Second' created successfully",
+											"status": "CREATED",
+											"statusCode": 201,
+											"data": {
+												"id": 3,
+												"value": 1,
+												"name": "Second",
+												"incrementOrder": 1
+											}
+										}
+									]
+								},
+								"example": [
+									{
+										"message": "Counter Named 'First' created successfully",
+										"status": "CREATED",
+										"statusCode": 201,
+										"data": {
+											"id": 1,
+											"value": 1,
+											"name": "First",
+											"incrementOrder": 1
+										}
+									},
+									{
+										"message": "Counter Named 'Second' created successfully",
+										"status": "CREATED",
+										"statusCode": 201,
+										"data": {
+											"id": 3,
+											"value": 1,
+											"name": "Second",
+											"incrementOrder": 1
+										}
+									}
+								]
+							}
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"get": {
+				"tags": [
+					"Misc"
+				],
+				"summary": "Fetch Counters List",
+				"description": "To fetch the list of counters stored in the application.\n\nThe API will return the list of counters. The counter objects attributes are ID, value(current-value), name of the counter and the increment value(default value is 1).",
+				"operationId": "FetchCountersList",
+				"parameters": [],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"headers": {
+							"Transfer-Encoding": {
+								"content": {
+									"text/plain": {
+										"schema": {
+											"type": "string"
+										},
+										"example": "chunked"
+									}
+								}
+							},
+							"Date": {
+								"content": {
+									"text/plain": {
+										"schema": {
+											"type": "string"
+										},
+										"example": "Wed, 28 Sep 2022 12:04:59 GMT"
+									}
+								}
+							},
+							"Keep-Alive": {
+								"content": {
+									"text/plain": {
+										"schema": {
+											"type": "string"
+										},
+										"example": "timeout=60"
+									}
+								}
+							},
+							"Connection": {
+								"content": {
+									"text/plain": {
+										"schema": {
+											"type": "string"
+										},
+										"example": "keep-alive"
+									}
+								}
+							}
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/FetchCountersList"
+										},
+										{
+											"example": {
+												"message": "Response returned successfully",
+												"status": "OK",
+												"statusCode": 200,
+												"data": [
+													{
+														"id": 2,
+														"value": 1,
+														"name": "Second",
+														"incrementOrder": 1
+													},
+													{
+														"id": 1,
+														"value": 6,
+														"name": "First",
+														"incrementOrder": 1
+													}
+												]
+											}
+										}
+									]
+								},
+								"example": {
+									"message": "Response returned successfully",
+									"status": "OK",
+									"statusCode": 200,
+									"data": [
+										{
+											"id": 2,
+											"value": 1,
+											"name": "Second",
+											"incrementOrder": 1
+										},
+										{
+											"id": 1,
+											"value": 6,
+											"name": "First",
+											"incrementOrder": 1
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/counters/incrementCounterValue/{name}": {
+			"patch": {
+				"tags": [
+					"Misc"
+				],
+				"summary": "Increment Counter By Name",
+				"description": "Pass the name of the counter to increment the value of the counter.",
+				"operationId": "IncrementCounterByName",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"style": "simple",
+						"schema": {
+							"type": "string",
+							"example": "null"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"headers": {
+							
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/IncrementCounterByName"
+										},
+										{
+											"example": {
+												"message": "The value of the counter First is incremented to 6.",
+												"status": "OK",
+												"statusCode": 200,
+												"data": {
+													"id": 1,
+													"value": 6,
+													"name": "First",
+													"incrementOrder": 1
+												}
+											}
+										}
+									]
+								},
+								"example": {
+									"message": "The value of the counter First is incremented to 6.",
+									"status": "OK",
+									"statusCode": 200,
+									"data": {
+										"id": 1,
+										"value": 6,
+										"name": "First",
+										"incrementOrder": 1
+									}
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		},
+		"/counters/{name}": {
+			"get": {
+				"tags": [
+					"Misc"
+				],
+				"summary": "Get Counter By Name",
+				"description": "The API will return the counter by it's name. The name has to be passed in API path.",
+				"operationId": "GetCounterByName",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"style": "simple",
+						"schema": {
+							"type": "string",
+							"example": "null"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"headers": {
+							
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/GetCounterByName"
+										},
+										{
+											"example": {
+												"message": "Response returned successfully",
+												"status": "OK",
+												"statusCode": 200,
+												"data": {
+													"id": 2,
+													"value": 1,
+													"name": "Second",
+													"incrementOrder": 1
+												}
+											}
+										}
+									]
+								},
+								"example": {
+									"message": "Response returned successfully",
+									"status": "OK",
+									"statusCode": 200,
+									"data": {
+										"id": 2,
+										"value": 1,
+										"name": "Second",
+										"incrementOrder": 1
+									}
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			},
+			"delete": {
+				"tags": [
+					"Misc"
+				],
+				"summary": "Delete Counter",
+				"description": "To delete the counter by name.",
+				"operationId": "DeleteCounter",
+				"parameters": [
+					{
+						"name": "name",
+						"in": "path",
+						"description": "",
+						"required": true,
+						"style": "simple",
+						"schema": {
+							"type": "string",
+							"example": "null"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"headers": {
+							
+						},
+						"content": {
+							"application/json": {
+								"schema": {
+									"allOf": [
+										{
+											"$ref": "#/components/schemas/DeleteCounter"
+										},
+										{
+											"example": {
+												"message": "Counter named 'Second' deleted!",
+												"status": "NO_CONTENT",
+												"statusCode": 204,
+												"data": null
+											}
+										}
+									]
+								},
+								"example": {
+									"message": "Counter named 'Second' deleted!",
+									"status": "NO_CONTENT",
+									"statusCode": 204,
+									"data": null
+								}
+							}
+						}
+					}
+				},
+				"deprecated": false
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"CreateCountersRequest": {
+				"title": "CreateCountersRequest",
+				"required": [
+					"name"
+				],
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					}
+				},
+				"example": {
+					"name": "First"
+				}
+			},
+			"CreateCounters": {
+				"title": "CreateCounters",
+				"required": [
+					"message",
+					"status",
+					"statusCode",
+					"data"
+				],
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"data": {
+						"$ref": "#/components/schemas/Data"
+					}
+				},
+				"example": {
+					"message": "Counter Named 'First' created successfully",
+					"status": "CREATED",
+					"statusCode": 201,
+					"data": {
+						"id": 1,
+						"value": 1,
+						"name": "First",
+						"incrementOrder": 1
+					}
+				}
+			},
+			"Data": {
+				"title": "Data",
+				"required": [
+					"id",
+					"value",
+					"name",
+					"incrementOrder"
+				],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"value": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"name": {
+						"type": "string"
+					},
+					"incrementOrder": {
+						"type": "integer",
+						"format": "int32"
+					}
+				},
+				"example": {
+					"id": 1,
+					"value": 1,
+					"name": "First",
+					"incrementOrder": 1
+				}
+			},
+			"IncrementCounterByName": {
+				"title": "IncrementCounterByName",
+				"required": [
+					"message",
+					"status",
+					"statusCode",
+					"data"
+				],
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"data": {
+						"$ref": "#/components/schemas/Data"
+					}
+				},
+				"example": {
+					"message": "The value of the counter First is incremented to 6.",
+					"status": "OK",
+					"statusCode": 200,
+					"data": {
+						"id": 1,
+						"value": 6,
+						"name": "First",
+						"incrementOrder": 1
+					}
+				}
+			},
+			"GetCounterByName": {
+				"title": "GetCounterByName",
+				"required": [
+					"message",
+					"status",
+					"statusCode",
+					"data"
+				],
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"data": {
+						"$ref": "#/components/schemas/Data"
+					}
+				},
+				"example": {
+					"message": "Response returned successfully",
+					"status": "OK",
+					"statusCode": 200,
+					"data": {
+						"id": 2,
+						"value": 1,
+						"name": "Second",
+						"incrementOrder": 1
+					}
+				}
+			},
+			"FetchCountersList": {
+				"title": "FetchCountersList",
+				"required": [
+					"message",
+					"status",
+					"statusCode",
+					"data"
+				],
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"data": {
+						"type": "array",
+						"items": {
+							"$ref": "#/components/schemas/Data"
+						},
+						"description": ""
+					}
+				},
+				"example": {
+					"message": "Response returned successfully",
+					"status": "OK",
+					"statusCode": 200,
+					"data": [
+						{
+							"id": 2,
+							"value": 1,
+							"name": "Second",
+							"incrementOrder": 1
+						},
+						{
+							"id": 1,
+							"value": 6,
+							"name": "First",
+							"incrementOrder": 1
+						}
+					]
+				}
+			},
+			"DeleteCounter": {
+				"title": "DeleteCounter",
+				"required": [
+					"message",
+					"status",
+					"statusCode",
+					"data"
+				],
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					},
+					"status": {
+						"type": "string"
+					},
+					"statusCode": {
+						"type": "integer",
+						"format": "int32"
+					},
+					"data": {
+						"type": "string",
+						"nullable": true
+					}
+				},
+				"example": {
+					"message": "Counter named 'Second' deleted!",
+					"status": "NO_CONTENT",
+					"statusCode": 204,
+					"data": null
+				}
+			}
+		}
+	},
+	"tags": [
+		{
+			"name": "Misc",
+			"description": ""
+		}
+	]
+}

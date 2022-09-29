@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "d272d51d-5001-4919-95d6-d67dba04759e",
+		"name": "Counters-Assignment",
+		"description": "A mini assessment to check the code.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10489016"
+	},
+	"item": [
+		{
+			"name": "Create Counter(s)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"name\": \"First\"\r\n  },\r\n  {\r\n    \"name\": \"Second\"\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/counters/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"counters",
+						""
+					]
+				},
+				"description": "The Array of JSON objects with counter name have to be passed in body via POST method. If the counter with the same name is not there, then it'll create with the counter with initial counter value of 1. The initial counter increment order will also be 1."
+			},
+			"response": [
+				{
+					"name": "Create Counter(s)",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"name\": \"First\"\r\n  },\r\n  {\r\n    \"name\": \"Second\"\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:5000/counters/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"counters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"message\": \"Counter Named 'First' created successfully\",\r\n        \"status\": \"CREATED\",\r\n        \"statusCode\": 201,\r\n        \"data\": {\r\n            \"id\": 1,\r\n            \"value\": 1,\r\n            \"name\": \"First\",\r\n            \"incrementOrder\": 1\r\n        }\r\n\t},\r\n    {\r\n        \"message\": \"Counter Named 'Second' created successfully\",\r\n        \"status\": \"CREATED\",\r\n        \"statusCode\": 201,\r\n        \"data\": {\r\n            \"id\": 3,\r\n            \"value\": 1,\r\n            \"name\": \"Second\",\r\n            \"incrementOrder\": 1\r\n        }\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Increment Counter By Name",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/counters/incrementCounterValue/:name",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"counters",
+						"incrementCounterValue",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				},
+				"description": "Pass the name of the counter to increment the value of the counter."
+			},
+			"response": [
+				{
+					"name": "Increment Counter By Name",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/counters/incrementCounterValue/First",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"counters",
+								"incrementCounterValue",
+								"First"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"The value of the counter First is incremented to 6.\",\n    \"status\": \"OK\",\n    \"statusCode\": 200,\n    \"data\": {\n        \"id\": 1,\n        \"value\": 6,\n        \"name\": \"First\",\n        \"incrementOrder\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Counter By Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/counters/:name",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"counters",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				},
+				"description": "The API will return the counter by it's name. The name has to be passed in API path."
+			},
+			"response": [
+				{
+					"name": "Get Counter By Name",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/counters/Second",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"counters",
+								"Second"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"Response returned successfully\",\n    \"status\": \"OK\",\n    \"statusCode\": 200,\n    \"data\": {\n        \"id\": 2,\n        \"value\": 1,\n        \"name\": \"Second\",\n        \"incrementOrder\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Fetch Counters List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/counters/",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"counters",
+						""
+					]
+				},
+				"description": "To fetch the list of counters stored in the application.\n\nThe API will return the list of counters. The counter objects attributes are ID, value(current-value), name of the counter and the increment value(default value is 1)."
+			},
+			"response": [
+				{
+					"name": "Fetch Counters List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/counters/",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"counters",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 28 Sep 2022 12:04:59 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Response returned successfully\",\n    \"status\": \"OK\",\n    \"statusCode\": 200,\n    \"data\": [\n        {\n            \"id\": 2,\n            \"value\": 1,\n            \"name\": \"Second\",\n            \"incrementOrder\": 1\n        },\n        {\n            \"id\": 1,\n            \"value\": 6,\n            \"name\": \"First\",\n            \"incrementOrder\": 1\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete Counter",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/counters/:name",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"counters",
+						":name"
+					],
+					"variable": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				},
+				"description": "To delete the counter by name."
+			},
+			"response": [
+				{
+					"name": "Delete Counter",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/counters/Third",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"counters",
+								"Third"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"message\": \"Counter named 'Second' deleted!\",\n    \"status\": \"NO_CONTENT\",\n    \"statusCode\": 204,\n    \"data\": null\n}"
+				}
+			]
+		}
+	]
+}
